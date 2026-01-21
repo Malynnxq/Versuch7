@@ -1,0 +1,24 @@
+Notizen zu Halbaddierer und Volladdierer (aus Vorlesung_17.txt und Vorlesung_18.txt)
+
+Halbaddierer (HA)
+- Verwendet nur zwei Operanden A und B (kein Carry-In).
+- Liefert Summe und Carry.
+- Summe ist A xor B.
+- Carry ist 1, wenn beide Operanden 1 sind (A and B).
+- Idee: Wahrheitstabelle -> XOR fuer Summe, AND fuer Carry (Vorlesung_17.txt um ~1202).
+
+Volladdierer (VA)
+- Rechnet ein Bit an einer beliebigen Stelle: Eingaben A, B und Carry-In.
+- Ausgaben: Summe und Carry-Out (Vorlesung_17.txt um ~1196).
+- Zwei Herleitungen wurden genannt:
+  1) Direkte Boolesche Formeln und gemeinsame Teilausdruecke finden.
+  2) Aufbau aus zwei Halbaddierern.
+- Aufbau mit zwei Halbaddierern:
+  - HA1: A + B -> Summe1 und Carry1.
+  - HA2: Summe1 + Carry-In -> Summe und Carry2.
+  - Carry-Out = Carry1 OR Carry2 (Vorlesung_17.txt um ~1215-1222).
+- Interpretation: Es kann ein Carry bei der ersten Addition fallen oder beim Addieren des Carry-In (Vorlesung_17.txt um ~1233).
+
+Einordnung im Addierer
+- Ein VA ist die Basiseinheit, mit der man einen n-Bit Addierer aufbaut (Vorlesung_18.txt um ~29-36).
+- Beim Ripple-Carry werden VAs in Serie geschaltet und der Carry laeuft von LSB bis MSB durch (Vorlesung_18.txt um ~36-39).

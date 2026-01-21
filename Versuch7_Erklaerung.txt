@@ -1,0 +1,19 @@
+Versuch 7 Erklaerung
+
+Was ich gemacht habe
+- my_half_adder.vhdl: Halbaddierer als NAND-only umgesetzt. Summe per XOR-Struktur aus NANDs, Carry als AND aus NANDs.
+- my_full_adder.vhdl: Volladdierer aus zwei Halbaddierern aufgebaut. Carry-OR mit NAND-NAND (DeMorgan) realisiert.
+- my_gen_n_bit_full_adder.vhdl: Generischen Ripple-Carry-Addierer mit generate erstellt. Subtraktion durch B xor Carry_in und Startuebertrag = Carry_in.
+- my_gen_n_bit_full_adder_tb2.vhdl: Exhaustive Tests fuer alle positiven und negativen Werte ergaenzt (Add und Sub).
+
+Warum so
+- Die Aufgabenstellung verlangt ausschliesslich NAND-Gatter fuer HA/VA. NAND ist funktional vollstaendig, daher lassen sich XOR, AND und OR daraus zusammensetzen.
+- Der Volladdierer wird wie im Skript aus zwei Halbaddierern und einem OR fuer die Carry-Ausgaenge aufgebaut.
+- Der n-bit Addierer nutzt eine Ripple-Carry-Kette, weil die Carry-Weitergabe einfach mit generate instanziiert werden kann.
+- Subtraktion wird als Addition im 2er-Komplement umgesetzt (B invertieren und +1 durch Startcarry).
+
+Theorie kurz
+- Halbaddierer: SUM = A xor B, CARRY = A and B.
+- Volladdierer: SUM = A xor B xor Cin, CARRY = (A and B) or (Cin and (A xor B)).
+- Ripple-Carry: n Volladdierer in Reihe, Carry wandert von LSB zu MSB.
+- 2er-Komplement-Subtraktion: A - B = A + (not B) + 1, daher B mit Sub-Signal xor und Carry_in = Sub.
