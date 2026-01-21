@@ -30,26 +30,22 @@ end my_half_adder;
 	--Notieren Sie ihre Umformungsschritte unter diesem Kommentar:
   
 	-- begin solution:
-	-- SUM = A xor B
+	-- not A = A nand A
+	-- SUM = A xor B = (A or B) and not(A and B) = not(not A and not B) and not(A and B)
+	-- = not((A nand A) and (B nand B)) and (A nand B) = (A nand A) nand (B nand B) and (A nand B)
 	-- XOR with NAND only:
 	-- N1 = A nand B
 	-- N2 = A nand N1
 	-- N3 = B nand N1
 	-- SUM = N2 nand N3
-	-- CARRY = A and B = N1 nand N1
+	-- CARRY = A and B = not(not(A and B)) = not(A nand B) = (A nand B) nand (A nand B)
 	-- end solution!!	
 
 -- dataflow
 architecture dataflow of my_half_adder is
-signal s_nand_ab : std_logic;
-signal s_nand_a  : std_logic;
-signal s_nand_b  : std_logic;
   begin
 -- begin solution:
-  s_nand_ab  <= P_A nand P_B;
-  s_nand_a   <= P_A nand s_nand_ab;
-  s_nand_b   <= P_B nand s_nand_ab;
-  P_SUM      <= s_nand_a nand s_nand_b;
-  P_CARRY_OUT <= s_nand_ab nand s_nand_ab;
+  P_SUM       <= (P_A nand (P_A nand P_B)) nand (P_B nand (P_A nand P_B));
+  P_CARRY_OUT <= (P_A nand P_B) nand (P_A nand P_B);
 -- end solution!!
 end dataflow;
